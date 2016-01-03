@@ -1,4 +1,7 @@
 *log*
 *~
+old
 *.sim
+*.sim*
 parMachines
+postProcessing

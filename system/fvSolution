@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.3.1                                 |
+|  \\    /   O peration     | Version:  2.4.0                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -10,6 +10,7 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
+    location    "system";
     object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -18,24 +19,23 @@ solvers
 {
     p
     {
-        solver           GAMG;
-        tolerance        1e-7;
-        relTol           0.01;
-        smoother         GaussSeidel;
-        nPreSweeps       0;
-        nPostSweeps      2;
+        solver          GAMG;
+	preconditioner	DIC;
+        tolerance       1e-08;
+        relTol          0.05;
+        smoother        DIC;
         cacheAgglomeration on;
-        agglomerator     faceAreaPair;
-        nCellsInCoarsestLevel 10;
-        mergeLevels      1;
+        nCellsInCoarsestLevel 20;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
     }
-
-    "(U|e|k|omega)"
+    "(k|omega)"
     {
         solver          GAMG;
         tolerance       1e-08;
         relTol          0.1;
-        smoother        GaussSeidel;
+	preconditioner	DIC;
+        smoother        DILU;
         nPreSweeps      0;
         nPostSweeps     2;
         nFinestSweeps   2;
@@ -44,36 +44,61 @@ solvers
         agglomerator    faceAreaPair;
         mergeLevels     1;
     }
+    "(U|e)"
+    {
+        solver          PBiCG;
+        tolerance       1e-08;
+        relTol          0.1;
+        preconditioner  DILU;
+        smoother        DILU;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 20;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    }
+
 }
 
 SIMPLE
 {
     nNonOrthogonalCorrectors 0;
-    
+    rhoMin          rhoMin [ 1 -3 0 0 0 ] 0;
+    rhoMax          rhoMax [ 1 -3 0 0 0 ] 0.005;
+    consistent yes;
+    residualControl
+    {
+        p               1e-07;
+        U               1e-07;
+        e               1e-07;
+
+        // possibly check turbulence fields
+        "(k|epsilon|omega)" 1e-7;
+    }
 }
 
 potentialFlow
 {
-    nNonOrthogonalCorrectors 10;
+	nNonOrthogonalCorrectors 10;
 }
 
 relaxationFactors
 {
     fields
     {
-        p               0.3;
+        p               1;
+        rho             0.5;
     }
     equations
     {
+	p		0.3;
         U               0.7;
-        k               0.4;
-        omega           0.4;
+        "(k|epsilon|omega)"   0.4;
+        e               0.6;
     }
 }
 
-cache
-{
-    grad(U);
-}
 
 // ************************************************************************* //

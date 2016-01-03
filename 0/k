@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.4.0                                 |
+|  \\    /   O peration     | Version:  3.0.1                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -15,52 +15,41 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [ 0 2 -2 0 0 0 0 ];
+dimensions      [0 2 -2 0 0 0 0];
 
 internalField   uniform 0.2997135;
 
 boundaryField
 {
+    defaultFaces
+    {
+        type            fixedValue;
+        value           nonuniform 0();
+    }
+    body
+    {
+        type            kqRWallFunction;
+        value           uniform 1e-10;
+    }
+    floor
+    {
+        type            kqRWallFunction;
+        value           uniform 1e-10;
+    }
     inlet
     {
         type            fixedValue;
         value           uniform 0.2997135;
     }
-
     outlet
     {
         type            zeroGradient;
     }
-    symmetry
-    {
-        type            slip;
-    }
     wall
     {
-        type		kqRWallFunction;
-    	value 		uniform 1e-10;
-    }
-    floor
-    {
-    	type 		kqRWallFunction;
-    	value 		uniform 1e-10;
-    }
-
-
-    body
-    {
-    	type 		kqRWallFunction;
-    	value 		uniform 1e-10;
-    }
-
-    defaultFaces
-    {
-       // type            compressible::kqRWallFunction;
-      //  value           uniform 234.375;
-        type            fixedValue;
+        type            kqRWallFunction;
         value           uniform 1e-10;
     }
-
 }
 
 

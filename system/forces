@@ -20,7 +20,7 @@ forces
     patches     ( "body" );
     pName       p;
     UName       U;
-    rhoName     rhoInf;     // Indicates incompressible
+    rhoName     rho;     // Indicates incompressible
     log         true;
     rhoInf      0.001161;          // Redundant for incompressible
 

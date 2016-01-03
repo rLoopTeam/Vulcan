@@ -114,7 +114,7 @@ castellatedMeshControls
     (
         {
             file "geom.eMesh";
-            level 0;
+            level 1;
         }
     );
 
@@ -176,11 +176,11 @@ castellatedMeshControls
             mode inside;
             levels ((0 1));
         }
-        finewake
-        {
-            mode inside;
-            levels ((0 2));
-        }
+//        finewake
+//        {
+//            mode inside;
+//            levels ((0 2));
+//        }
 
     }
 
@@ -256,14 +256,15 @@ addLayersControls
         {
             nSurfaceLayers 2;
         }
-		wall
-        {
-            nSurfaceLayers 2;
-        }
-		floor
-        {
-            nSurfaceLayers 2;
-        }
+//	wall
+//
+//	{
+//	    nSurfaceLayers 1;
+//	}
+//	floor
+//	{
+//	    nSurfaceLayers 1;
+//	}
     }
 
     // Expansion factor for layer mesh
