@@ -31,7 +31,7 @@ boundaryField
     }
     floor
     {
-        type            zeroGradient;
+        type            slip;
     }
     inlet
     {
@@ -39,13 +39,12 @@ boundaryField
     }
     outlet
     {
-        type            outletInlet;
-        outletValue           uniform 100;
-	value		$internalField;
+	type           fixedValue;
+       value           uniform 100;    
     }
     wall
     {
-        type            zeroGradient;
+        type            slip;
     }
 }
 

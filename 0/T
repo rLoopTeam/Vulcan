@@ -31,7 +31,7 @@ boundaryField
     }
     floor
     {
-        type            zeroGradient;
+        type            slip;
     }
     inlet
     {
@@ -46,7 +46,7 @@ boundaryField
     }
     wall
     {
-        type            zeroGradient;
+        type            slip;
     }
 }
 

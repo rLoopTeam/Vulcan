@@ -33,8 +33,8 @@ boundaryField
     }
     floor
     {
-        type            compressible::alphatWallFunction;
-        value           uniform 0;
+        type            slip;
+//        value           uniform 0;
     }
     inlet
     {
@@ -47,8 +47,8 @@ boundaryField
     }
     wall
     {
-        type            compressible::alphatWallFunction;
-        value           uniform 0;
+        type            slip;
+//        value           uniform 0;
     }
 }
 

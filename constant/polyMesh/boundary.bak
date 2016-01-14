@@ -22,42 +22,42 @@ FoamFile
         type            empty;
         inGroups        1(empty);
         nFaces          0;
-        startFace       14484349;
+        startFace       2514095;
     }
     body
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          248719;
-        startFace       14484349;
+        nFaces          16716;
+        startFace       2514095;
     }
     floor
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          59252;
-        startFace       14733068;
+        nFaces          23678;
+        startFace       2530811;
     }
     inlet
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          1845;
-        startFace       14792320;
+        nFaces          1822;
+        startFace       2554489;
     }
     outlet
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          2064;
-        startFace       14794165;
+        nFaces          1849;
+        startFace       2556311;
     }
     wall
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          208956;
-        startFace       14796229;
+        nFaces          66551;
+        startFace       2558160;
     }
 )
 

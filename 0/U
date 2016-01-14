@@ -39,13 +39,13 @@ boundaryField
     }
     wall
     {
-        type            fixedValue;
-       value           uniform (44.7 0 0);
+        type            slip;
+ //      value           uniform (44.7 0 0);
     }
     floor
     {
-        type            fixedValue;
-       value           uniform (44.7 0 0);
+        type            slip;
+ //      value           uniform (44.7 0 0);
     }
     body
     {
