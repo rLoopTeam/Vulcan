@@ -40,9 +40,7 @@ boundaryField
     }
     outlet
     {
-        type            inletOutlet;
-	inletValue	uniform 300;
-	value		uniform 300;
+        type            zeroGradient;
     }
     wall
     {
