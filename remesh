@@ -1,0 +1,30 @@
+#!/bin/bash
+options=$1
+machinefile=$2
+if [ -d "constant" ]; then
+	pushd constant/polyMesh/
+	rm -r *
+	popd
+	blockMesh 2>&1 | tee meshlog.log
+	surfaceFeatureExtract 2>&1 | tee -a meshlog.log
+        sed -i.bak s/empty/wall/g constant/polyMesh/boundary
+	if [ "$options" == "-par" ]
+	then
+		rm -rf processor*
+		decomposePar -force 2>&1 | tee -a meshlog.log
+		foamJob -parallel -screen snappyHexMesh -overwrite 2>&1 | tee -a meshlog.log
+		reconstructParMesh -noZero -constant 2>&1 | tee -a meshlog.log
+	elif [ "$options" == "-mpar" ]; then
+		rm -rf processor*
+		decomposePar -force 2>&1 | tee -a meshlog.log
+		mpirun -np 8 -machinefile $2 snappyHexMesh -parallel -overwrite 2>&1 | tee -a meshlog.log
+		reconstructParMesh -noZero -constant 2>&1 | tee -a meshlog.log
+	else
+		snappyHexMesh -overwrite 2>&1 | tee -a meshlog.log
+	
+	fi
+	checkMesh | tee checkMesh.log
+	sed -i.bak s/empty/wall/g constant/polyMesh/boundary
+else
+	echo "you are not in a case directory"
+fi
