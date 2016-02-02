@@ -2,9 +2,7 @@
 options=$1
 machinefile=$2
 if [ -d "constant" ]; then
-	pushd constant/polyMesh/
-	rm -r *
-	popd
+	rm -rf constant/polyMesh/*
 	blockMesh 2>&1 | tee meshlog.log
 	surfaceFeatureExtract 2>&1 | tee -a meshlog.log
         sed -i.bak s/empty/wall/g constant/polyMesh/boundary
