@@ -16,7 +16,7 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (134.112 0 0);
+internalField   uniform (1.0 0 0);
 
 boundaryField
 {
@@ -27,30 +27,26 @@ boundaryField
     }
     inlet
     {
-        type            inletOutlet;
-        inletValue           uniform (134.112 0 0);
-	value		$internalField;
+        type pressureDirectedInletVelocity;
+        inletDirection uniform (1 0 0);
+        value uniform (0 0 0); 
     }
     outlet
     {
-        type            inletOutlet;
-	inletValue	uniform (0 0 0);
-	value		uniform (0 0 0);
+        type            zeroGradient;
     }
     wall
     {
         type            slip;
- //      value           uniform (44.7 0 0);
     }
     floor
     {
         type            slip;
- //      value           uniform (44.7 0 0);
     }
     body
     {
         type            fixedValue;
-       value           uniform (0 0 0);
+        value           uniform (0 0 0);
     }
     symmetry
     {

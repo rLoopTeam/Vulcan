@@ -17,7 +17,7 @@ FoamFile
 
 solvers
 {
-    p
+    "(p|pFinal)"
     {
         solver          GAMG;
         tolerance       1e-8;
@@ -28,7 +28,7 @@ solvers
         agglomerator    faceAreaPair;
         mergeLevels     1;
     }
-    "(k|omega|U|e)"
+    "(k|omega|U|e|UFinal|eFinal|omegaFinal|kFinal|rho|rhoFinal)"
     {
         solver          GAMG;
         tolerance       1e-8;
@@ -42,42 +42,6 @@ solvers
         agglomerator    faceAreaPair;
         mergeLevels     1;
     }
-/*    p*/
-/*    {*/
-/*        solver          GAMG;*/
-/*        tolerance       1e-08;*/
-/*        relTol          0.05;*/
-/*        smoother        GaussSeidel;*/
-/*        cacheAgglomeration on;*/
-/*        nCellsInCoarsestLevel 20;*/
-/*        agglomerator    faceAreaPair;*/
-/*        mergeLevels     1;*/
-/*    }*/
-
-/*    U*/
-/*    {*/
-/*        solver          smoothSolver;*/
-/*        smoother        GaussSeidel;*/
-/*        nSweeps         2;*/
-/*        tolerance       1e-07;*/
-/*        relTol          0.1;*/
-/*    }*/
-
-/*    e*/
-/*    {*/
-/*        solver          smoothSolver;*/
-/*        smoother        symGaussSeidel;*/
-/*        tolerance       1e-07;*/
-/*        relTol          0.1;*/
-/*    }*/
-
-/*    "(k|epsilon|omega)"*/
-/*    {*/
-/*        $U;*/
-/*        tolerance       1e-07;*/
-/*        relTol          0.1;*/
-/*    }*/
-
 
 }
 
@@ -86,7 +50,7 @@ SIMPLE
     nNonOrthogonalCorrectors 0;
     rhoMin          rhoMin [ 1 -3 0 0 0 ] 0;
     rhoMax          rhoMax [ 1 -3 0 0 0 ] 0.5;
-    consistent yes;
+    //consistent yes;
     residualControl
     {
         p               1e-07;
@@ -97,6 +61,15 @@ SIMPLE
         "(k|epsilon|omega)" 1e-7;
     }
 }
+
+PIMPLE
+{
+	 momentumPredictor yes;
+    rhoMin          rhoMin [ 1 -3 0 0 0 ] 0.0001;
+    rhoMax          rhoMax [ 1 -3 0 0 0 ] 0.5;
+    nOuterCorrectors 3;
+}
+
 
 potentialFlow
 {

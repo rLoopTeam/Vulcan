@@ -17,7 +17,7 @@ FoamFile
 
 ddtSchemes
 {
-    default         steadyState;
+    default         Euler;
 }
 
 gradSchemes
@@ -36,6 +36,8 @@ divSchemes
     div(phi,omega) bounded Gauss linearUpwind Gauss linear;
     div(phi,k)     bounded Gauss linearUpwind Gauss linear;
     div(phi,Ekp)   bounded Gauss linearUpwind Gauss linear;
+	div(phiv,p)     bounded Gauss linearUpwind Gauss linear;
+	div(phi,K)     bounded Gauss linearUpwind Gauss linear;
 }
 
 laplacianSchemes

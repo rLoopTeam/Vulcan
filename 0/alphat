@@ -34,7 +34,6 @@ boundaryField
     floor
     {
         type            slip;
-//        value           uniform 0;
     }
     inlet
     {
@@ -43,12 +42,12 @@ boundaryField
     }
     outlet
     {
-        type            zeroGradient;
+        type            calculated;
+		value			uniform 0;
     }
     wall
     {
         type            slip;
-//        value           uniform 0;
     }
 }
 

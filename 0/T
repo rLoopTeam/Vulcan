@@ -35,8 +35,10 @@ boundaryField
     }
     inlet
     {
-        type            fixedValue;
-        value           uniform 300;
+	type	totalTemperature;
+	T0	uniform 300;
+	value 	uniform 300;
+	gamma 		1.4;
     }
     outlet
     {

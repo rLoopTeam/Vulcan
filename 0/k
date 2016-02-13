@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.2997135;
+internalField   uniform 50.60;
 
 boundaryField
 {
@@ -28,27 +28,27 @@ boundaryField
     }
     body
     {
-        type            kqRWallFunction;
+        type            fixedValue;
         value           uniform 1e-10;
     }
     floor
     {
         type            slip;
-  //      value           uniform 0.2997135;
     }
     inlet
     {
         type            fixedValue;
-        value           uniform 0.2997135;
+        value           uniform 50.60;
     }
     outlet
     {
-        type            zeroGradient;
+        type            inletOutlet;
+        inletValue      uniform 50.60;
+        value           uniform 50.60;
     }
     wall
     {
         type            slip;
-//        value           uniform 0.2997135;
     }
 }
 
