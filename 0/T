@@ -35,10 +35,15 @@ boundaryField
     }
     inlet
     {
-	type	totalTemperature;
-	T0	uniform 300;
-	value 	uniform 300;
-	gamma 		1.4;
+	type            waveTransmissive;
+        field           T;
+        phi             phi;
+        rho             rho;
+        psi             thermo:psi;
+        gamma           1.4;
+        fieldInf        300;
+        lInf            1.0;
+        value           uniform 300;
     }
     outlet
     {

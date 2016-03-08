@@ -16,20 +16,27 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (1.0 0 0);
+internalField   uniform (134.112 0 0);
 
 boundaryField
 {
     defaultFaces
     {
         type            fixedValue;
-        value           uniform (0 0 0);
+        value           uniform (134.112 0 0);
     }
     inlet
     {
-        type pressureDirectedInletVelocity;
-        inletDirection uniform (1 0 0);
-        value uniform (0 0 0); 
+
+          type            waveTransmissive;
+        field           U;
+        phi             phi;
+        rho             rho;
+        psi             thermo:psi;
+        gamma           1.4;
+        fieldInf        (134.112 0 0);
+        lInf            1.0;
+        value           uniform (134.112 0 0);
     }
     outlet
     {

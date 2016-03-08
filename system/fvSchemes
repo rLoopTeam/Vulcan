@@ -29,13 +29,13 @@ divSchemes
 {
     default         none;
 
-    div(phi,U)     bounded Gauss linearUpwindV Gauss linear;
-    div(phid,p)     bounded Gauss linearUpwind Gauss linear;
+    div(phi,U)     bounded Gauss linearUpwindV cellLimited Gauss linear 1.0;
+    div(phid,p)     bounded Gauss linearUpwind cellLimited Gauss linear 1.0;
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
-    div(phi,e)      bounded Gauss linearUpwind Gauss linear;
-    div(phi,omega) bounded Gauss linearUpwind Gauss linear;
-    div(phi,k)     bounded Gauss linearUpwind Gauss linear;
-    div(phi,Ekp)   bounded Gauss linearUpwind Gauss linear;
+    div(phi,e)      bounded Gauss linearUpwind cellLimited Gauss linear 1.0;
+    div(phi,omega) bounded Gauss linearUpwind cellLimited Gauss linear 1.0;
+    div(phi,k)     bounded Gauss linearUpwind cellLimited Gauss linear 1.0;
+    div(phi,Ekp)   bounded Gauss linearUpwind cellLimited Gauss linear 1.0;
 	div(phiv,p)     bounded Gauss linearUpwind Gauss linear;
 	div(phi,K)     bounded Gauss linearUpwind Gauss linear;
 }

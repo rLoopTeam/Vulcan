@@ -17,12 +17,40 @@ FoamFile
 
 solvers
 {
+/*    p*/
+/*    {*/
+/*        solver          GAMG;*/
+/*        tolerance       1e-8;*/
+/*        relTol          0.05;*/
+/*        smoother        GaussSeidel;*/
+/*        cacheAgglomeration on;*/
+/*        nCellsInCoarsestLevel 20;*/
+/*        agglomerator    faceAreaPair;*/
+/*        mergeLevels     1;*/
+/*    }*/
+/*    "(k|omega|U|e)"*/
+/*    {*/
+/*        solver          GAMG;*/
+/*        tolerance       1e-8;*/
+/*        relTol          0.1;*/
+/*        smoother        GaussSeidel;*/
+/*        nPreSweeps      0;*/
+/*        nPostSweeps     2;*/
+/*        nFinestSweeps   2;*/
+/*        cacheAgglomeration true;*/
+/*        nCellsInCoarsestLevel 20;*/
+/*        agglomerator    faceAreaPair;*/
+/*        mergeLevels     1;*/
+/*    }*/
     "(p|pFinal)"
     {
         solver          GAMG;
         tolerance       1e-8;
         relTol          0.05;
         smoother        DIC;
+        nPreSweeps      3;
+        nPostSweeps     2;
+        nFinestSweeps   2;
         cacheAgglomeration on;
         nCellsInCoarsestLevel 20;
         agglomerator    faceAreaPair;
@@ -32,9 +60,9 @@ solvers
     {
         solver          GAMG;
         tolerance       1e-8;
-        relTol          0.1;
+        relTol          0.01;
         smoother        DILU;
-        nPreSweeps      0;
+        nPreSweeps      3;
         nPostSweeps     2;
         nFinestSweeps   2;
         cacheAgglomeration true;
@@ -42,7 +70,6 @@ solvers
         agglomerator    faceAreaPair;
         mergeLevels     1;
     }
-
 }
 
 SIMPLE
@@ -50,7 +77,7 @@ SIMPLE
     nNonOrthogonalCorrectors 0;
     rhoMin          rhoMin [ 1 -3 0 0 0 ] 0;
     rhoMax          rhoMax [ 1 -3 0 0 0 ] 0.5;
-    //consistent yes;
+    consistent yes;
     residualControl
     {
         p               1e-07;
@@ -68,6 +95,7 @@ PIMPLE
     rhoMin          rhoMin [ 1 -3 0 0 0 ] 0.0001;
     rhoMax          rhoMax [ 1 -3 0 0 0 ] 0.5;
     nOuterCorrectors 3;
+    consistent yes;
 }
 
 
@@ -86,8 +114,8 @@ relaxationFactors
     equations
     {
         U               0.7;
-        "(k|epsilon|omega)"   0.7;
-        e               0.8;
+        "(k|epsilon|omega)"   0.3;
+        e               0.7;
     }
 }
 

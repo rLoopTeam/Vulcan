@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform 1000.0;
+internalField   uniform 827.3709;
 
 boundaryField
 {
@@ -35,15 +35,30 @@ boundaryField
     }
     inlet
     {
-    type		totalPressure;
-        p0              uniform 1073.54;
-        gamma		 1.4;
-        value           1073.54;
+		type zeroGradient;
+/*             type            waveTransmissive;*/
+/*        field           p;*/
+/*        phi             phi;*/
+/*        rho             rho;*/
+/*        psi             thermo:psi;*/
+/*        gamma           1.4;*/
+/*        fieldInf        827.3709;*/
+/*        lInf            4.0;*/
+/*        value           uniform 827.3709;*/
     }
     outlet
     {
-        type            fixedValue;
-		value			uniform 1000.;
+ //       type            fixedValue;
+//		value			uniform 827.3709;
+   type            waveTransmissive;
+        field           p;
+        phi             phi;
+        rho             rho;
+        psi             thermo:psi;
+        gamma           1.4;
+        fieldInf        827.3709;
+        lInf            1.0;
+        value           uniform 827.3709;
     }
     wall
     {
